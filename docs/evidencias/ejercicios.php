@@ -135,7 +135,7 @@ echo "<br><br><b>Reto Extra - Factura Simple</b><br>";
 $articulo="Celular";
 $preciou=1300000;
 $cantidad=3;
-echo "Producto adquirido: ".$articulo."<br>Precio unitario: ".$preciou."<br>Cantidad: ".$cantidad."<br>Subtotal: ".$preciou*$cantidad."<br>IVA: ".($preciou*$cantidad)0.19."<br>Total: ".($preciou$cantidad)+(($preciou*$cantidad)*0.19)."<br><br>";
+echo "Producto adquirido: ".$articulo."<br>Precio unitario: ".$preciou."<br>Cantidad: ".$cantidad."<br>Subtotal: ".$preciou*$cantidad."<br>IVA: ".($preciou*$cantidad)*0.19."<br>Total: ".($preciou+$cantidad)+(($preciou*$cantidad)*0.19)."<br><br>";
 
 // EJERCICIO 23
 echo "<b>Ejercicio 23</b><br>";
@@ -177,7 +177,7 @@ if($cantidad<1){
 }
 
 //RETO EXTRA
-echo "<b>Reto extra - USO var_dump() </b><br>";
+echo "<b> extra - USO var_dump() </b><br>";
 $numero=10;
 
 var_dump($numero=="10");echo"<br>";
