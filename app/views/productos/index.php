@@ -8,8 +8,8 @@
             <th>stock</th>
         </tr>
     </thead>
-    <tbody>
-      <?php foreach ($productos as $producto): ?>
+    <tbody>             
+      <?php foreach ($productos as $producto): ?>     
     <tr>
         <td><?= ($producto['nombre']) ?></td>
         <td><?= ($producto['precio']) ?></td>
