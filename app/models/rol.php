@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . "/../../config/Database.php";
 
-class Producto{
+class Rol{
     private $connection;
 
     public function __construct()
@@ -13,18 +13,17 @@ class Producto{
 
     public function getAll()
     {
-        $sql="SELECT * FROM productos";
+        $sql="SELECT * FROM rol";
         $consulta=$this->connection->query($sql);
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function guardar($nombre, $precio, $stock)
+     public function guardar($idrol, $nombrerol)
     {
-        $sql = "INSERT INTO productos (nombre, precio, stock) VALUES (:nombre, :precio, :stock)";
+        $sql = "INSERT INTO rol (idrol, nombrerol) VALUES (:idrol, :nombrerol)";
         $stmt = $this->connection->prepare($sql);
-        $stmt->bindParam(':nombre', $nombre);
-        $stmt->bindParam(':precio', $precio);
-        $stmt->bindParam(':stock', $stock);
+        $stmt->bindParam(':idrol', $idrol);
+        $stmt->bindParam(':nombrerol', $nombrerol);
         return $stmt->execute();
     }
 }
