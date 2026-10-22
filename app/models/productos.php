@@ -27,5 +27,19 @@ class Producto{
         $stmt->bindParam(':stock', $stock);
         return $stmt->execute();
     }
+  public function getById($id)
+{
+    $stmt = $this->connection->prepare("SELECT * FROM productos WHERE id = ?");
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-?>
+
+public function actualizar($id, $nombre, $precio, $stock)
+{
+    $stmt = $this->db->prepare(
+        "UPDATE productos SET nombre = ?, precio = ?, stock = ? WHERE id = ?"
+    );
+    return $stmt->execute([$nombre, $precio, $stock, $id]);
+}
+
+}

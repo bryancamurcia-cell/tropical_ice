@@ -33,8 +33,34 @@ class productoController{
             }
 
     }
+public function editar($id)
+{
 
+    $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+    $modeloproducto = new Producto();
+    $producto = $modeloproducto->getById($id); 
+
+    require_once __DIR__ . "/../views/productos/editar.php";
+}
+
+public function actualizar()
+{
+    
+    $id = $_POST['id'];
+    $nombre = $_POST['nombre'];
+    $precio = $_POST['precio'];
+    $stock = $_POST['stock'];
 
     
+    $productoModel = new Producto();
+    $resultado = $productoModel->actualizar($id, $nombre, $precio, $stock);
+
+    if ($resultado) {
         
+        header("Location: /producto");
+        exit();
+    } else {
+        echo "Error al actualizar el producto";
+    }
+}
 }

@@ -5,8 +5,11 @@ require_once __DIR__ . "/../app/controllers/rolControllers.php";
 require_once __DIR__ . "/../app/controllers/usuarioControllers.php";
 require_once __DIR__ . "/../app/controllers/ventaControllers.php";
 
+
 $method = $_SERVER['REQUEST_METHOD'];
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // ignora ?parametros
+$uri = $_SERVER['REQUEST_URI'];
+$ruta = parse_url($uri, PHP_URL_PATH);
+
 
 ?>
 
@@ -32,7 +35,16 @@ if ($method === "GET" && $uri === "/producto") {
     $producto = new productoController();
     $producto->index();
 }
+if ($method === "GET" && $ruta === "/producto/editar") {
+    $productoController = new productoController();
+    $productoController->editar($_GET['id']);
+}
 
+
+if ($method === "POST" && $uri === "/producto/actualizar") {
+    $productoController = new productoController();
+    $productoController->actualizar();
+}
 if ($method === "GET" && $uri === "/rol") {
     $rol = new rolController();
     $rol->index();
