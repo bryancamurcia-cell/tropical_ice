@@ -37,18 +37,26 @@ if ($method === "GET" && $uri === "/producto") {
 }
 if ($method === "GET" && $ruta === "/producto/editar") {
     $productoController = new productoController();
-    $productoController->editar($_GET['id']);
+    $productoController->editar();
 }
 
 
 if ($method === "POST" && $uri === "/producto/actualizar") {
     $productoController = new productoController();
     $productoController->actualizar();
+    
+
 }
+
 if ($method === "GET" && $uri === "/rol") {
     $rol = new rolController();
     $rol->index();
 }
+if ($method === "GET" && $ruta === "/rol/editar") {
+    $rolController = new rolController();
+    $rolController->editar($_GET['id']);
+}
+
 
 if ($method === "GET" && $uri === "/rol/crear") {
     $rol = new rolController();
@@ -59,9 +67,26 @@ if ($method === "POST" && $uri === "/rol") {
     $rol = new rolController();
     $rol->guardar();
 }
+
+
 if ($method === "GET" && $uri === "/usuario") {
     $usuario = new usuarioController();
     $usuario->index();
+}
+if ($method === "GET" && $ruta === "/usuario/editar") {
+    $usuarioController = new usuarioController();
+    $usuarioController->editar($_GET['id']);
+}
+
+
+if ($method === "GET" && $uri === "/usuario/crear") {
+    $usuario = new usuarioController();
+    $usuario->crear();
+}
+
+if ($method === "POST" && $uri === "/usuario") {
+    $usuario = new usuarioController();
+    $usuario->guardar();
 }
 if ($method === "GET" && $uri === "/venta") {
     $venta = new ventaController();

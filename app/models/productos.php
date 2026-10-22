@@ -43,3 +43,9 @@ public function actualizar($id, $nombre, $precio, $stock)
 }
 
 }
+
+
+
+
+
+

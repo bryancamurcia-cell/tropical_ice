@@ -1,40 +1,59 @@
 <?php
-require_once __DIR__ ."/../models/rol.php";
+require_once __DIR__ . "/../models/rol.php";
 
-class rolController{
-    public function index(){
-        $rolModel = new Rol();
+class rolController
+{
+    public function index()
+    {
+        $rolModel = new rol();
 
-        try{
+        try {
             $rols = $rolModel->getAll();
-        } catch (PDOException){
+        } catch (PDOException) {
             echo "Se encontraron errores";
         }
-        
 
-        require_once __DIR__ ."/../views/rol/index.php";
+
+        require_once __DIR__ . "/../views/rol/index.php";
     }
-    public function crear(){
-        require_once __DIR__ ."/../views/rol/crear.php";
-    }
+    public function editar ()
+    { 
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        $rolModel = new rol();
+        $rol = $rolModel->getById($id);
 
-    public function guardar(){
-            $idrol = $_POST["idrol"];     
-            $nombrerol = $_POST["nombrerol"];
-            
-
-            $rol = new Rol();
-            $resultado= $rol->guardar($idrol, $nombrerol);
-
-            if($resultado ){
-                echo "Rol guardado correctamente";
-            } else {
-                echo "Error al guardar el rol";
-            }
-
+        require_once __DIR__ . "/../views/rol/editar.php";
     }
 
+    public function crear()
+    {
+        require_once __DIR__ . "/../views/rol/crear.php";
+    }
+
+    public function guardar()
+    {
+        $nombrerol = $_POST["nombrerol"];
+       
+
+        $rolModel = new rol();
+        $resultado = $rolModel->guardar($idrol, $nombrerol);
+
+        if ($resultado) {
+            echo "Rol guardado correctamente";
+        } else {
+            echo "Error al guardar el rol";
+        }
 
     
-        
+
+        $rol = new rol();
+        $resultado = $rol->guardar($idrol, $nombrerol);
+
+        if ($resultado) {
+            echo "Rol guardado correctamente";
+        } else {
+            echo "Error al guardar el rol";
+        }
+    }
 }
+

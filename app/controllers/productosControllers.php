@@ -33,7 +33,7 @@ class productoController{
             }
 
     }
-public function editar($id)
+public function editar()
 {
 
     $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);

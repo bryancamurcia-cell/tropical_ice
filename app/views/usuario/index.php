@@ -9,6 +9,7 @@
             <th>password</th>
             <th>direccion</th>
             <th>idrol</th>
+            <th>accion</th>
             
 
         </tr>
@@ -22,6 +23,7 @@
         <td><?= ($usuario['password']) ?></td>
         <td><?= ($usuario['direccion']) ?></td>
         <td><?= ($usuario['idrol']) ?></td>
+        <td> <a href="/usuario/editar?id=<?= $usuario['idusuario']; ?>">editar</a> </td> 
     </tr>
 <?php endforeach; ?>
     </tbody>

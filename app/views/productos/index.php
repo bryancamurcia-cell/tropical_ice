@@ -10,12 +10,12 @@
         </tr>
     </thead>
     <tbody>             
-      <?php foreach ($productos as $producto): ?>     
+         <?php foreach ($productos as $producto): ?>     
     <tr>
         <td><?= ($producto['nombre']) ?></td>
         <td><?= ($producto['precio']) ?></td>
         <td><?= ($producto['stock']) ?></td>
-        <td> <a href="/producto/editar?id=<?= $producto['id']; ?>">editar</a> </td> 
+        <td> <a href="/producto/editar?id=<?= $producto['id'] ?>"> editar </a> </td> 
     </tr>
 <?php endforeach; ?>
     </tbody>
