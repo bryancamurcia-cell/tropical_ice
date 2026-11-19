@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . "/../../config/Database.php";
 
-class Rol{
+class Rol
+{
     private $connection;
 
     public function __construct()
@@ -9,16 +10,15 @@ class Rol{
         $database = new Database();
         $this->connection = $database->conectar();
     }
-    
 
     public function getAll()
     {
-        $sql="SELECT * FROM rol";
-        $consulta=$this->connection->query($sql);
+        $sql = "SELECT * FROM rol";
+        $consulta = $this->connection->query($sql);
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
-     public function guardar($idrol, $nombrerol)
+    public function guardar($idrol, $nombrerol)
     {
         $sql = "INSERT INTO rol (idrol, nombrerol) VALUES (:idrol, :nombrerol)";
         $stmt = $this->connection->prepare($sql);
@@ -27,12 +27,20 @@ class Rol{
         return $stmt->execute();
     }
 
- public function getById($id)
-{
-    $stmt = $this->connection->prepare("SELECT * FROM rol WHERE idrol = :id");
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-    
-}
+    public function getById($id)
+    {
+        $stmt = $this->connection->prepare("SELECT * FROM rol WHERE idrol = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function actualizar($idrol, $nombrerol)
+    {
+        $sql = "UPDATE rol SET nombrerol = :nombrerol WHERE idrol = :idrol";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':nombrerol', $nombrerol);
+        $stmt->bindParam(':idrol', $idrol, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 }

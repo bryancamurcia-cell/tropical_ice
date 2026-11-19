@@ -1,4 +1,4 @@
-<form action="/productos" method="POST">
+<form action="/producto" method="POST">
     <label for="nombre">Nombre</label>
     <input type="text" name="nombre" id="nombre" required><br>
 
@@ -10,4 +10,3 @@
 
     <button type="submit">Guardar</button>
 </form>
-

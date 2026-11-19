@@ -19,4 +19,13 @@
     </tr>
 <?php endforeach; ?>
     </tbody>
+    <td>
+    <a href="/producto/editar?id=<?= $p['id'] ?>">editar</a>
+
+    <form action="/producto/eliminar" method="POST" style="display:inline"
+          onsubmit="return confirm('¿Seguro que quieres eliminar este producto?');">
+        <input type="hidden" name="id" value="<?= $p['id'] ?>">
+        <button type="submit">eliminar</button>
+    </form>
+</td>
 </table>

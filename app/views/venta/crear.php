@@ -1,11 +1,10 @@
-<form action ="/venta" method="POST">
-    
-    <input type="text" name="idventa" id="idventa" required><br>
+<h1>Crear venta</h1>
+<form action="/venta" method="POST">
+    <label for="fecha_venta">Fecha de venta:</label>
+    <input type="date" name="fecha_venta" id="fecha_venta" required><br><br>
 
-    
-    <input type="number" name="fecha_venta" id="fecha_venta" step="0.01" required><br>
+    <label for="idusuario">ID usuario:</label>
+    <input type="number" name="idusuario" id="idusuario" required><br><br>
 
-    <input type="number" name="idusuario" id="idusuario" required><br>
-
-    <button type="submit">guardar</button>
+    <button type="submit">Guardar</button>
 </form>

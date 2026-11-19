@@ -1,16 +1,19 @@
-<form action ="/usuario" method="POST">
-    
-    <input type="text" name="idusuario" id="idusuario" required><br>
+<h1>Crear usuario</h1>
+<form action="/usuario" method="POST">
+    <label for="nombreusuario">Nombre:</label>
+    <input type="text" name="nombreusuario" id="nombreusuario" required><br><br>
 
-    <input type="text" name="nombreusuario" id="nombreusuario" required><br>
+    <label for="usuario">Usuario:</label>
+    <input type="text" name="usuario" id="usuario" required><br><br>
 
-    <input type="text" name="Usuario" id="Usuario" required><br>
+    <label for="password">Contraseña:</label>
+    <input type="password" name="password" id="password" required><br><br>
 
-    <input type="password" name="password" id="password" required><br>
+    <label for="direccion">Dirección:</label>
+    <input type="text" name="direccion" id="direccion" required><br><br>
 
-    <input type="text" name="direccion" id="direccion" required><br>
+    <label for="idrol">ID rol:</label>
+    <input type="number" name="idrol" id="idrol" required><br><br>
 
-    <input type="number" name="idrol" id="idrol" required><br>
-
-    <button type="submit">guardar</button>
+    <button type="submit">Guardar</button>
 </form>

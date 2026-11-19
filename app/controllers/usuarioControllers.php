@@ -5,7 +5,8 @@ class usuarioController
 {
     public function index()
     {
-        $usuarioModel = new usuario();
+        $usuarioModel = new Usuario();
+        $usuarios = [];
 
         try {
             $usuarios = $usuarioModel->getAll();
@@ -13,16 +14,7 @@ class usuarioController
             echo "Se encontraron errores";
         }
 
-
         require_once __DIR__ . "/../views/usuario/index.php";
-    }
-    public function editar ()
-    { 
-        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-        $usuarioModel = new usuario();
-        $usuario = $usuarioModel->getById($id);
-
-        require_once __DIR__ . "/../views/usuario/editar.php";
     }
 
     public function crear()
@@ -32,29 +24,75 @@ class usuarioController
 
     public function guardar()
     {
-        $nombreusuario = $_POST["nombreusuario"];
-        $usuario = $_POST["usuario"];
-        $password = $_POST["password"];
-        $direccion = $_POST["direccion"];
+        $nombreusuario = trim($_POST["nombreusuario"] ?? '');
+        $usuario       = trim($_POST["usuario"] ?? '');
+        $password      = $_POST["password"] ?? '';
+        $direccion     = trim($_POST["direccion"] ?? '');
+        $idrol         = filter_input(INPUT_POST, 'idrol', FILTER_VALIDATE_INT);
 
-        $usuarioModel = new usuario();
-        $resultado = $usuarioModel->guardar($nombreusuario, $usuario, $password, $direccion);
-
-        if ($resultado) {
-            echo "Usuario guardado correctamente";
-        } else {
-            echo "Error al guardar el usuario";
+        if ($nombreusuario === '' || $usuario === '' || $password === '' || $direccion === '' || !$idrol) {
+            http_response_code(400);
+            echo "Datos no válidos";
+            return;
         }
 
-        $stock = $_POST["stock"];
+        $usuarioModel = new Usuario();
 
-        $usuario = new usuario();
-        $resultado = $usuario->guardar($nombreusuario, $usuario, $password, $direccion);
+        try {
+            $resultado = $usuarioModel->guardar($nombreusuario, $usuario, $password, $direccion, $idrol);
+        } catch (PDOException) {
+            $resultado = false;
+        }
 
         if ($resultado) {
-            echo "Usuario guardado correctamente";
-        } else {
-            echo "Error al guardar el usuario";
+            header("Location: /usuario");
+            exit;
         }
+        echo "Error al guardar el usuario (¿el rol existe?)";
+    }
+
+    public function editar()
+    {
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        $usuarioModel = new Usuario();
+        $usuario = $id ? $usuarioModel->getById($id) : false;
+
+        if (!$usuario) {
+            http_response_code(404);
+            echo "Usuario no encontrado";
+            return;
+        }
+
+        require_once __DIR__ . "/../views/usuario/editar.php";
+    }
+
+    public function actualizar()
+    {
+        $idusuario     = filter_input(INPUT_POST, 'idusuario', FILTER_VALIDATE_INT);
+        $nombreusuario = trim($_POST["nombreusuario"] ?? '');
+        $usuario       = trim($_POST["usuario"] ?? '');
+        $password      = $_POST["password"] ?? '';
+        $direccion     = trim($_POST["direccion"] ?? '');
+        $idrol         = filter_input(INPUT_POST, 'idrol', FILTER_VALIDATE_INT);
+
+        if (!$idusuario || $nombreusuario === '' || $usuario === '' || $password === '' || $direccion === '' || !$idrol) {
+            http_response_code(400);
+            echo "Datos no válidos";
+            return;
+        }
+
+        $usuarioModel = new Usuario();
+
+        try {
+            $resultado = $usuarioModel->actualizar($idusuario, $nombreusuario, $usuario, $password, $direccion, $idrol);
+        } catch (PDOException) {
+            $resultado = false;
+        }
+
+        if ($resultado) {
+            header("Location: /usuario");
+            exit;
+        }
+        echo "Error al actualizar el usuario (¿el rol existe?)";
     }
 }
